@@ -8,6 +8,7 @@ import {
   Typography,
   Card,
   Box,
+  Container,
 } from '@mui/material';
 import { GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
@@ -15,12 +16,16 @@ import { ProductTypes } from '../../components/Product';
 import data from '../../utils/data';
 import NextLink from 'next/link';
 import Image from 'next/image';
+import { useContext } from 'react';
+import { Store } from '../../components/Providers/StoreProvider';
+import { CART_ADD_ITEM } from '../../utils/Store/Store';
 type PropsTypes = {
   product: ProductTypes;
 };
-function product({ product }: PropsTypes) {
+function Product({ product }: PropsTypes) {
+  const { state, dispatch } = useContext(Store);
   const addToCartHandler = () => {
-    return;
+    dispatch({ type: CART_ADD_ITEM, payload: product });
   };
   return (
     <div>
@@ -33,7 +38,6 @@ function product({ product }: PropsTypes) {
           <Link variant='button'>back to products</Link>
         </NextLink>
       </Box>
-
       <Grid container columnSpacing={4}>
         {/* 1 */}
         <Grid item md={6} xs={12}>
@@ -114,7 +118,7 @@ function product({ product }: PropsTypes) {
   );
 }
 
-export default product;
+export default Product;
 
 export const getStaticPaths = () => {
   const { products } = data;

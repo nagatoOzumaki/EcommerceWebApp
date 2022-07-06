@@ -1,16 +1,18 @@
-import { AppBar, Switch, ThemeProvider, Toolbar } from '@mui/material';
+import { AppBar, Grid, Switch, Toolbar, Typography } from '@mui/material';
 import NextLink from 'next/link';
 import { useContext } from 'react';
-
-// import darkTheme from '../../utils/Theme';
-import ThemeContext from '../../utils/ThemeContext';
-
+import { DARK_MODE_OFF, DARK_MODE_ON } from '../../utils/Store/Store';
+import { Store } from '../Providers/StoreProvider';
 function LayoutAppBar() {
-  const { theme, toggleTheme } = useContext(ThemeContext);
-  const handleDarkModeToggle = () => toggleTheme();
+  const { state, dispatch } = useContext(Store);
+
+  const handleDarkModeToggle = () => {
+    dispatch({ type: state.darkMode ? DARK_MODE_OFF : DARK_MODE_ON });
+  };
 
   return (
     // <ThemeProvider theme={darkTheme}>
+
     <AppBar
       position='static'
       sx={{
@@ -26,15 +28,24 @@ function LayoutAppBar() {
 
         <div style={{ flexGrow: 1 }} />
         <Switch
-          checked={theme === 'dark'}
+          checked={state.darkMode}
           onChange={handleDarkModeToggle}
-          sx={{ marginRight: '3rem' }}
+        ></Switch>
+        <Typography
+          variant='body1'
+          sx={{ marginRight: '3rem', fontWeight: 'bold' }}
         >
-          {' '}
-          Theme:{theme}
-        </Switch>
+          {state.darkMode ? 'dark' : 'light'}
+        </Typography>
         <NextLink href={'/cart'} passHref>
-          <a style={{ marginRight: '3rem' }}>Cart</a>
+          <Grid item sx={{ marginRight: '3rem', fontWeight: 'bold' }}>
+            <Grid item sm={12}>
+              <Typography>{state.cart.cartItems.length}</Typography>
+            </Grid>
+            <Grid item sm={12}>
+              <Typography>Cart</Typography>
+            </Grid>
+          </Grid>
         </NextLink>
         <NextLink href={'/login'} passHref>
           <a style={{ marginRight: '3rem' }}>Login</a>
