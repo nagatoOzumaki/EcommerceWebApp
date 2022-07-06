@@ -1,6 +1,6 @@
 import { createMuiTheme } from '@mui/material';
 
-const lightTheme = createMuiTheme({
+export const lightTheme = createMuiTheme({
   typography: {
     h1: {
       fontSize: '1.6rem',
@@ -23,7 +23,7 @@ const lightTheme = createMuiTheme({
     },
   },
 });
-const darkTheme = createMuiTheme({
+export const darkTheme = createMuiTheme({
   typography: {
     h1: {
       fontSize: '1.6rem',
@@ -46,19 +46,7 @@ const darkTheme = createMuiTheme({
     },
   },
 });
-export const getTheme = (theme: any) =>
-  theme === 'dark' ? darkTheme : lightTheme;
-// export const storeTheme = (theme: any) =>
-//   localStorage.setItem('theme', theme.toString());
-// export const fetchTheme = () => {
-//   const storedTeme = localStorage.getItem('theme')
-//     ? localStorage.getItem('theme')
-//     : '';
-//   if (storedTeme === 'dark') {
-//     return 'dark';
-//   } else {
-//     return 'light';
-//   }
-// };
+export const getTheme = (isDarkMode: boolean) =>
+  isDarkMode ? darkTheme : lightTheme;
 
 export default lightTheme;

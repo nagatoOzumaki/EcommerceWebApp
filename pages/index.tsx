@@ -4,10 +4,11 @@ import Product, { ProductTypes } from '../components/Product';
 import styles from '../styles/Home.module.css';
 import data from '../utils/data';
 
-const { products } = data;
 type AddToCartHandlerType = (product: ProductTypes) => void;
-
-const Home: NextPage = () => {
+type PropsType = {
+  products: ProductTypes[];
+};
+const Home: NextPage<PropsType> = ({ products }: PropsType) => {
   const addToCartHandler: AddToCartHandlerType = (product: ProductTypes) => {};
   return (
     <Container>
@@ -26,3 +27,10 @@ const Home: NextPage = () => {
 };
 
 export default Home;
+
+export const getServerSideProps = () => {
+  const { products } = data;
+  return {
+    props: { products },
+  };
+};
