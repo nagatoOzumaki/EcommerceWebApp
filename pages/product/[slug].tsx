@@ -8,7 +8,6 @@ import {
   Typography,
   Card,
   Box,
-  Container,
 } from '@mui/material';
 import { GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
@@ -114,15 +113,6 @@ function Product({ product }: PropsTypes) {
           </Card>
         </Grid>
       </Grid>
-
-      <Container>
-        <Typography>
-          {state.cart.paymentMethod}
-          {state.cart.cartItems.map((item: any, index: number) => (
-            <Typography key={index}>{item.name}</Typography>
-          ))}
-        </Typography>
-      </Container>
     </div>
   );
 }
