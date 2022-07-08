@@ -8,7 +8,6 @@ import {
   Typography,
   Card,
   Box,
-  Container,
 } from '@mui/material';
 import { GetServerSidePropsContext } from 'next';
 import Head from 'next/head';

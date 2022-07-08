@@ -6,7 +6,6 @@ import StoreProvider from '../components/Providers/StoreProvider';
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <StoreProvider>
-      {' '}
       <ThemeProvider>
         <Layout>
           <Component {...pageProps} />
