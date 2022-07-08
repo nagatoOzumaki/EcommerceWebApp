@@ -9,6 +9,7 @@ export const CART_CLEAR = 'CART_CLEAR';
 export const USER_LOGIN = 'USER_LOGIN';
 export const USER_LOGOUT = 'USER_LOGOUT';
 export const SAVE_SHIPPING_ADDRESS = 'SAVE_SHIPPING_ADDRESS';
+export const CART_SET_ITEMS = 'CART_SET_ITEMS';
 export type ProductTypes = {
   id: number;
   name: string;
@@ -24,6 +25,7 @@ export type ProductTypes = {
   countInStock: number;
   description: string;
 };
+
 export type InitialStateType = {
   darkMode: boolean;
   cart: {
@@ -42,7 +44,7 @@ export const initialState: InitialStateType = {
     shippingAddress: '',
     paymentMethod: 'bank',
   },
-  userInfo: {},
+  userInfo: null,
 };
 
 export type ActionType = {
@@ -68,7 +70,9 @@ export const cartReducer: CartReducerType = (
         localStorage.setItem('theme', JSON.stringify(false));
       }
       return { ...state, darkMode: false };
-
+    case CART_SET_ITEMS:
+      const storedItems = action.payload;
+      return { ...state, cart: { ...state.cart, cartItems: storedItems } };
     case CART_ADD_ITEM:
       const ids = state.cart.cartItems.map((item) => item.id);
       let newState = state;
@@ -81,6 +85,9 @@ export const cartReducer: CartReducerType = (
           },
         };
       }
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('cartItems', JSON.stringify(state.cart.cartItems));
+      }
       return newState;
     case CART_REMOVE_ITEM:
       const cartItems = state.cart.cartItems.filter(
@@ -90,6 +97,9 @@ export const cartReducer: CartReducerType = (
         ...state,
         cart: { ...state.cart, cartItems },
       };
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('cartItems', JSON.stringify(state.cart.cartItems));
+      }
       return removeItemState;
     case SAVE_SHIPPING_ADDRESS:
       return {
