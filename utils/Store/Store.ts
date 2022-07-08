@@ -70,14 +70,17 @@ export const cartReducer: CartReducerType = (
       return { ...state, darkMode: false };
 
     case CART_ADD_ITEM:
-      const newState = {
-        ...state,
-        cart: {
-          ...state.cart,
-          cartItems: [...state.cart.cartItems, action.payload],
-        },
-      };
-
+      const ids = state.cart.cartItems.map((item) => item.id);
+      let newState = state;
+      if (!ids.includes(action.payload.id)) {
+        newState = {
+          ...state,
+          cart: {
+            ...state.cart,
+            cartItems: [...state.cart.cartItems, action.payload],
+          },
+        };
+      }
       return newState;
     case CART_REMOVE_ITEM:
       const cartItems = state.cart.cartItems.filter(

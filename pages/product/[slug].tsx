@@ -114,15 +114,6 @@ function Product({ product }: PropsTypes) {
           </Card>
         </Grid>
       </Grid>
-
-      <Container>
-        <Typography>
-          {state.cart.paymentMethod}
-          {state.cart.cartItems.map((item: any, index: number) => (
-            <Typography key={index}>{item.name}</Typography>
-          ))}
-        </Typography>
-      </Container>
     </div>
   );
 }
