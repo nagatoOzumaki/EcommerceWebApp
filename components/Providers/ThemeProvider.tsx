@@ -21,7 +21,7 @@ function ThemeProvider({ children }: PropsTypes) {
       storedItems = str ? JSON.parse(str) : [];
       dispatch({ type: CART_SET_ITEMS, payload: storedItems });
     }
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     setCurrentTheme(getTheme(state.darkMode));

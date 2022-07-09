@@ -1,7 +1,7 @@
 export const CART_ADD_ITEM = 'ADD_TO_CART';
 export const DARK_MODE_ON = 'DARK_MODE_ON';
 export const DARK_MODE_OFF = 'DARK_MODE_OFF';
-export const CART_REMOVE_ITEM = 'ADD_TO_CART';
+export const CART_REMOVE_ITEM = 'CART_REMOVE_ITEM';
 export const SAVE_SHIPPING_ADDRESS_MAP_LOCATION =
   'SAVE_SHIPPING_ADDRESS_MAP_LOCATION';
 export const SAVE_PAYMENT_METHOD = 'SAVE_PAYMENT_METHOD';
@@ -24,6 +24,7 @@ export type ProductTypes = {
   numReviews: number;
   countInStock: number;
   description: string;
+  quantity: number;
 };
 
 export type InitialStateType = {
@@ -90,10 +91,12 @@ export const cartReducer: CartReducerType = (
       }
       return newState;
     case CART_REMOVE_ITEM:
+      console.log('from store');
       const cartItems = state.cart.cartItems.filter(
         (item) => item.id !== action.payload.id
       );
-      const removeItemState: InitialStateType = {
+
+      const removeItemState = {
         ...state,
         cart: { ...state.cart, cartItems },
       };
