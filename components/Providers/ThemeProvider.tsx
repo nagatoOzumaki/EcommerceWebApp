@@ -3,11 +3,9 @@ import { useContext, useEffect, useState } from 'react';
 import { getTheme } from '../../utils/Theme';
 import { Theme } from '@mui/system';
 import { Store } from './StoreProvider';
-import {
-  CART_SET_ITEMS,
-  DARK_MODE_OFF,
-  DARK_MODE_ON,
-} from '../../utils/Store/Store';
+
+import { CART_SET_ITEMS } from '../../utils/Store/Store';
+
 type PropsTypes = {
   children: JSX.Element[] | JSX.Element;
 };
@@ -21,7 +19,7 @@ function ThemeProvider({ children }: PropsTypes) {
       storedItems = str ? JSON.parse(str) : [];
       dispatch({ type: CART_SET_ITEMS, payload: storedItems });
     }
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     setCurrentTheme(getTheme(state.darkMode));

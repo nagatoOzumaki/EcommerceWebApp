@@ -18,13 +18,17 @@ import Image from 'next/image';
 import { useContext } from 'react';
 import { Store } from '../../components/Providers/StoreProvider';
 import { CART_ADD_ITEM } from '../../utils/Store/Store';
+import { useRouter } from 'next/router';
+
 type PropsTypes = {
   product: ProductTypes;
 };
 function Product({ product }: PropsTypes) {
   const { state, dispatch } = useContext(Store);
+  const router = useRouter();
   const addToCartHandler = () => {
     dispatch({ type: CART_ADD_ITEM, payload: product });
+    router.push('/cart');
   };
   return (
     <div>

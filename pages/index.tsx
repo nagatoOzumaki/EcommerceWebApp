@@ -1,15 +1,24 @@
 import { Container, Grid, Typography } from '@mui/material';
 import type { NextPage } from 'next';
+import { useRouter } from 'next/router';
+import { useContext } from 'react';
 import Product, { ProductTypes } from '../components/Product';
-import styles from '../styles/Home.module.css';
+import { Store } from '../components/Providers/StoreProvider';
+
 import data from '../utils/data';
+import { CART_ADD_ITEM } from '../utils/Store/Store';
 
 type AddToCartHandlerType = (product: ProductTypes) => void;
 type PropsType = {
   products: ProductTypes[];
 };
 const Home: NextPage<PropsType> = ({ products }: PropsType) => {
-  const addToCartHandler: AddToCartHandlerType = (product: ProductTypes) => {};
+  const { dispatch } = useContext(Store);
+  const router = useRouter();
+  const addToCartHandler: AddToCartHandlerType = (product: ProductTypes) => {
+    dispatch({ type: CART_ADD_ITEM, payload: product });
+    router.push('/cart');
+  };
   return (
     <Container>
       <Typography variant='h4'>Home page</Typography>
