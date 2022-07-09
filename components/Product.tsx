@@ -22,6 +22,7 @@ export type ProductTypes = {
   numReviews: number;
   countInStock: number;
   description: string;
+  quantity: number;
 };
 type PropsTypes = {
   product: ProductTypes;
