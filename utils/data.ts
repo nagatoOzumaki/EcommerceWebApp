@@ -1,13 +1,13 @@
 const data = {
   users: [
     {
-      name: 'John',
+      name: 'riad',
       email: 'admin@example.com',
       password: '123456',
       isAdmin: true,
     },
     {
-      name: 'Jane',
+      name: 'user',
       email: 'user@example.com',
       password: '123456',
       isAdmin: false,
