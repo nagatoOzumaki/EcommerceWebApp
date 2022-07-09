@@ -34,7 +34,12 @@ export type InitialStateType = {
     shippingAddress: Object;
     paymentMethod: string;
   };
-  userInfo: Object | null;
+  userInfo: {
+    json?: string;
+    name: string;
+    username: string;
+    isAdmin: boolean;
+  } | null;
 };
 let theme = true;
 
@@ -52,11 +57,11 @@ export type ActionType = {
   type: string;
   payload?: any;
 };
-export type CartReducerType = (
+export type StateReducerType = (
   state: InitialStateType,
   action: ActionType
 ) => InitialStateType;
-export const cartReducer: CartReducerType = (
+export const stateReducer: StateReducerType = (
   state: InitialStateType,
   action: ActionType
 ): InitialStateType => {
@@ -87,7 +92,10 @@ export const cartReducer: CartReducerType = (
         };
       }
       if (typeof window !== 'undefined') {
-        localStorage.setItem('cartItems', JSON.stringify(state.cart.cartItems));
+        localStorage.setItem(
+          'cartItems',
+          JSON.stringify(newState.cart.cartItems)
+        );
       }
       return newState;
     case CART_REMOVE_ITEM:
@@ -95,13 +103,19 @@ export const cartReducer: CartReducerType = (
       const cartItems = state.cart.cartItems.filter(
         (item) => item.id !== action.payload.id
       );
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
       const removeItemState = {
         ...state,
         cart: { ...state.cart, cartItems },
       };
       if (typeof window !== 'undefined') {
-        localStorage.setItem('cartItems', JSON.stringify(state.cart.cartItems));
+        localStorage.setItem(
+          'cartItems',
+          JSON.stringify(removeItemState.cart.cartItems)
+        );
       }
       return removeItemState;
     case SAVE_SHIPPING_ADDRESS:
@@ -131,9 +145,12 @@ export const cartReducer: CartReducerType = (
         ...state,
         cart: { ...state.cart, paymentMethod: action.payload },
       };
-    case USER_LOGOUT:
+    case USER_LOGIN:
       const newUserInfo = action.payload;
       const loginState: InitialStateType = { ...state, userInfo: newUserInfo };
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('userInfo', JSON.stringify(loginState.userInfo));
+      }
       return loginState;
     case USER_LOGOUT:
       const logoutState: InitialStateType = {
@@ -145,6 +162,9 @@ export const cartReducer: CartReducerType = (
           paymentMethod: '',
         },
       };
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('userInfo', JSON.stringify(''));
+      }
       return logoutState;
     default:
       return state;

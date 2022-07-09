@@ -4,6 +4,7 @@ import { getTheme } from '../../utils/Theme';
 import { Theme } from '@mui/system';
 import { Store } from './StoreProvider';
 import { CART_SET_ITEMS } from '../../utils/Store/Store';
+
 type PropsTypes = {
   children: JSX.Element[] | JSX.Element;
 };

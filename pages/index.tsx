@@ -1,12 +1,12 @@
-import { Container, Grid, Typography } from '@mui/material';
+import { Button, Container, Grid, Typography } from '@mui/material';
 import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { useContext } from 'react';
 import Product, { ProductTypes } from '../components/Product';
 import { Store } from '../components/Providers/StoreProvider';
-import styles from '../styles/Home.module.css';
+
 import data from '../utils/data';
-import { CART_ADD_ITEM } from '../utils/Store/Store';
+import { CART_ADD_ITEM, USER_LOGOUT } from '../utils/Store/Store';
 
 type AddToCartHandlerType = (product: ProductTypes) => void;
 type PropsType = {
@@ -19,8 +19,15 @@ const Home: NextPage<PropsType> = ({ products }: PropsType) => {
     dispatch({ type: CART_ADD_ITEM, payload: product });
     router.push('/cart');
   };
+<<<<<<< HEAD
+=======
+  const handleLogout = () => {
+    dispatch({ type: USER_LOGOUT });
+  };
+>>>>>>> master
   return (
     <Container>
+      <Button onClick={handleLogout}>Log Out</Button>
       <Typography variant='h4'>Home page</Typography>
       <Grid container spacing={3}>
         {products.map((product) => {
