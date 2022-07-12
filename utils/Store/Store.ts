@@ -103,10 +103,6 @@ export const stateReducer: StateReducerType = (
       const cartItems = state.cart.cartItems.filter(
         (item) => item.id !== action.payload.id
       );
-<<<<<<< HEAD
-
-=======
->>>>>>> master
       const removeItemState = {
         ...state,
         cart: { ...state.cart, cartItems },

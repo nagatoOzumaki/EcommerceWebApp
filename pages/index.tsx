@@ -19,12 +19,9 @@ const Home: NextPage<PropsType> = ({ products }: PropsType) => {
     dispatch({ type: CART_ADD_ITEM, payload: product });
     router.push('/cart');
   };
-<<<<<<< HEAD
-=======
   const handleLogout = () => {
     dispatch({ type: USER_LOGOUT });
   };
->>>>>>> master
   return (
     <Container>
       <Button onClick={handleLogout}>Log Out</Button>
